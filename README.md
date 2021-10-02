@@ -1,2 +1,2 @@
 # Taller1-C2
-Taller de fuerza bruta
+Taller de complejidad algorítmica
