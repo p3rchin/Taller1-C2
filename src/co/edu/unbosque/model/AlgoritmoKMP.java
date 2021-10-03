@@ -6,7 +6,7 @@ package co.edu.unbosque.model;
 class AlgoritmoKMP {
 	int KMPSearch(String pat, String txt) {
 
-		int cantidad = 0;
+		int amount = 0;
 		int M = pat.length();
 		int N = txt.length();
 
@@ -27,7 +27,7 @@ class AlgoritmoKMP {
 				i++;
 			}
 			if (j == M) {
-				cantidad++;
+				amount++;
 				j = lps[j - 1];
 			}
 
@@ -41,7 +41,7 @@ class AlgoritmoKMP {
 					i = i + 1;
 			}
 		}
-		return cantidad;
+		return amount;
 	}
 
 	void computeLPSArray(String pat, int M, int lps[]) {

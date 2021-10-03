@@ -29,7 +29,7 @@ public class FileWindowView extends JFrame {
 	private JTextArea textAreaShow;
 	private JScrollPane scrollPane;
 	private JFileChooser fileChooser;
-	String texto;
+	String text;
 
 	public FileWindowView() {
 
@@ -46,7 +46,7 @@ public class FileWindowView extends JFrame {
 
 	public void initialize() {
 
-		fileChooser = new JFileChooser(); 
+		fileChooser = new JFileChooser();
 
 		title1 = new JLabel("Enter the word to search");
 		title1.setBounds(260, 2, 400, 50);
@@ -87,7 +87,7 @@ public class FileWindowView extends JFrame {
 		close.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		close.setActionCommand("WINDOWCLOSE1");
 		add(close);
-		
+
 		imageButton3 = new ImageIcon("images/previous.png");
 		sourceButton3 = new ImageIcon(imageButton3.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		returnButton = new JButton();
@@ -110,31 +110,31 @@ public class FileWindowView extends JFrame {
 	public String openFileToSearch() {
 
 		String aux = "";
-		texto = "";
+		text = "";
 
 		try {
 			/* llamamos el metodo que permite cargar la ventana */
 			fileChooser.showOpenDialog(this);
 			/* abrimos el archivo seleccionado */
-			File abre = fileChooser.getSelectedFile();
+			File open = fileChooser.getSelectedFile();
 
 			/*
 			 * recorremos el archivo, lo leemos para plasmarlo en el area de texto
 			 */
-			if (abre != null) {
-				FileReader archivos = new FileReader(abre);
-				BufferedReader lee = new BufferedReader(archivos);
-				while ((aux = lee.readLine()) != null) {
-					texto += aux + "\n";
+			if (open != null && open.getName().endsWith("txt")) {
+				FileReader archive = new FileReader(open);
+				BufferedReader read = new BufferedReader(archive);
+				while ((aux = read.readLine()) != null) {
+					text += aux + "\n";
 				}
 
-				lee.close();
+				read.close();
 			}
 		} catch (IOException ex) {
-			JOptionPane.showMessageDialog(null, ex + "" + "\nNo se ha encontrado el archivo", "ADVERTENCIA!!!",
+			JOptionPane.showMessageDialog(null, ex + "" + "\nThe file was no founded", "WARNING!!!",
 					JOptionPane.WARNING_MESSAGE);
 		}
-		return texto;
+		return text;
 	}
 
 	/**
@@ -432,16 +432,17 @@ public class FileWindowView extends JFrame {
 	}
 
 	/**
-	 * @return the texto
+	 * @return the text
 	 */
-	public String getTexto() {
-		return texto;
+	public String getText() {
+		return text;
 	}
 
 	/**
-	 * @param texto the texto to set
+	 * @param text the text to set
 	 */
-	public void setTexto(String texto) {
-		this.texto = texto;
+	public void setText(String text) {
+		this.text = text;
 	}
+
 }
