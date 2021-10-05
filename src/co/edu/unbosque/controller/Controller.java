@@ -30,6 +30,7 @@ public class Controller implements ActionListener {
 		fileView.getMinimize().addActionListener(this);
 		fileView.getClose().addActionListener(this);
 		fileView.getReturnButton().addActionListener(this);
+		fileView.getButton1().addActionListener(this);
 	}
 
 	@Override
@@ -48,6 +49,10 @@ public class Controller implements ActionListener {
 			fileView.setVisible(true);
 			String file = fileView.openFileToSearch();
 			fileView.getTextAreaShow().setText(file);
+			
+			
+		}else if(command.equals("SEARCHWORD")) {
+			
 		} else if (command.equals("WINDOWRETURN")) {
 			fileView.setVisible(false);
 			principalView.setVisible(true);

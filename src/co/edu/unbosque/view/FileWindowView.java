@@ -2,6 +2,7 @@ package co.edu.unbosque.view;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.BufferedReader;
@@ -17,19 +18,21 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class FileWindowView extends JFrame {
 
 	private ImageIcon background1, sourceBackground, imageButton1, sourceButton1, imageButton2, sourceButton2,
 			imageButton3, sourceButton3, imageButton4, sourceButton4;
-	private JLabel imageBackground;
+	private JLabel imageBackground, image;
 	private TypeButton button1, button2, button3;
-	private JButton returnButton, minimize, close;
+	private JButton searchButton, returnButton, minimize, close;
 	private JLabel title1;
-	private JTextArea textAreaShow;
+	private JTextArea textAreaShow, estadisticText;
+	private JTextField textSearch;
 	private JScrollPane scrollPane;
 	private JFileChooser fileChooser;
-	String text;
+	String texto;
 
 	public FileWindowView() {
 
@@ -46,7 +49,7 @@ public class FileWindowView extends JFrame {
 
 	public void initialize() {
 
-		fileChooser = new JFileChooser();
+		fileChooser = new JFileChooser(); 
 
 		title1 = new JLabel("Enter the word to search");
 		title1.setBounds(260, 2, 400, 50);
@@ -57,13 +60,49 @@ public class FileWindowView extends JFrame {
 		scrollPane.setBounds(10, 100, 765, 350);
 		add(scrollPane);
 
+		ImageIcon im1 = new ImageIcon(getClass().getResource("/images/lupa.png"));
+		ImageIcon ic1 = new ImageIcon(im1.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+
+		image = new JLabel(ic1);
+		image.setBounds(230, 60, 20, 20);
+		image.setVisible(true);
+		add(image);
+		
+		imageButton4 = new ImageIcon("ºimages/searchButton.png");
+		sourceButton3 = new ImageIcon(imageButton4.getImage().getScaledInstance(92, 20, Image.SCALE_DEFAULT));
+		button1 = new TypeButton();
+		button1.setBounds(490, 60, 92, 20);
+		button1.setBorderPainted(false);
+		button1.setContentAreaFilled(false);
+		button1.setFocusPainted(false);
+		button1.setIcon(sourceButton3);
+		button1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		button1.setActionCommand("SEARCHWORD");
+		add(button1);
+		
+		
+		textSearch = new JTextField();
+		textSearch.setFont(new Font("Arial", Font.ROMAN_BASELINE, 12));
+		textSearch.setBounds(270, 60, 200, 20);
+		add(textSearch);
+		
+		
 		textAreaShow = new JTextArea();
 		textAreaShow.setEditable(false);
 		textAreaShow.setBackground(Color.white);
-		textAreaShow.setFont(new Font("Verdama", Font.ROMAN_BASELINE, 12));
+		textAreaShow.setFont(new Font("Verdama", Font.ROMAN_BASELINE, 14));
 		textAreaShow.setLineWrap(true);
 		scrollPane.setViewportView(textAreaShow);
 
+		estadisticText = new JTextArea();
+		estadisticText.setPreferredSize(new Dimension(540, 330));
+		estadisticText.setBounds(200, 100, 500, 260);
+		estadisticText.setFont(new Font("Verdama", Font.ROMAN_BASELINE, 12));
+		estadisticText.setBackground(null);
+		estadisticText.setEditable(false);
+		estadisticText.setLineWrap(true);
+		add(estadisticText);
+		
 		imageButton1 = new ImageIcon("images/minimize.png");
 		sourceButton1 = new ImageIcon(imageButton1.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		minimize = new JButton();
@@ -87,7 +126,7 @@ public class FileWindowView extends JFrame {
 		close.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		close.setActionCommand("WINDOWCLOSE1");
 		add(close);
-
+		
 		imageButton3 = new ImageIcon("images/previous.png");
 		sourceButton3 = new ImageIcon(imageButton3.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		returnButton = new JButton();
@@ -110,31 +149,31 @@ public class FileWindowView extends JFrame {
 	public String openFileToSearch() {
 
 		String aux = "";
-		text = "";
+		texto = "";
 
 		try {
 			/* llamamos el metodo que permite cargar la ventana */
 			fileChooser.showOpenDialog(this);
 			/* abrimos el archivo seleccionado */
-			File open = fileChooser.getSelectedFile();
+			File abre = fileChooser.getSelectedFile();
 
 			/*
 			 * recorremos el archivo, lo leemos para plasmarlo en el area de texto
 			 */
-			if (open != null && open.getName().endsWith("txt")) {
-				FileReader archive = new FileReader(open);
-				BufferedReader read = new BufferedReader(archive);
-				while ((aux = read.readLine()) != null) {
-					text += aux + "\n";
+			if (abre != null) {
+				FileReader archivos = new FileReader(abre);
+				BufferedReader lee = new BufferedReader(archivos);
+				while ((aux = lee.readLine()) != null) {
+					texto += aux + "\n";
 				}
 
-				read.close();
+				lee.close();
 			}
 		} catch (IOException ex) {
-			JOptionPane.showMessageDialog(null, ex + "" + "\nThe file was no founded", "WARNING!!!",
+			JOptionPane.showMessageDialog(null, ex + "" + "\nNo se ha encontrado el archivo", "ADVERTENCIA!!!",
 					JOptionPane.WARNING_MESSAGE);
 		}
-		return text;
+		return texto;
 	}
 
 	/**
@@ -334,6 +373,20 @@ public class FileWindowView extends JFrame {
 	}
 
 	/**
+	 * @return the searchButton
+	 */
+	public JButton getSearchButton() {
+		return searchButton;
+	}
+
+	/**
+	 * @param searchButton the searchButton to set
+	 */
+	public void setSearchButton(JButton searchButton) {
+		this.searchButton = searchButton;
+	}
+
+	/**
 	 * @return the returnButton
 	 */
 	public JButton getReturnButton() {
@@ -404,6 +457,20 @@ public class FileWindowView extends JFrame {
 	}
 
 	/**
+	 * @return the textSearch
+	 */
+	public JTextField getTextSearch() {
+		return textSearch;
+	}
+
+	/**
+	 * @param textSearch the textSearch to set
+	 */
+	public void setTextSearch(JTextField textSearch) {
+		this.textSearch = textSearch;
+	}
+
+	/**
 	 * @return the scrollPane
 	 */
 	public JScrollPane getScrollPane() {
@@ -432,17 +499,16 @@ public class FileWindowView extends JFrame {
 	}
 
 	/**
-	 * @return the text
+	 * @return the texto
 	 */
-	public String getText() {
-		return text;
+	public String getTexto() {
+		return texto;
 	}
 
 	/**
-	 * @param text the text to set
+	 * @param texto the texto to set
 	 */
-	public void setText(String text) {
-		this.text = text;
+	public void setTexto(String texto) {
+		this.texto = texto;
 	}
-
 }
