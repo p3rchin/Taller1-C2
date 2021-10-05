@@ -18,6 +18,10 @@ public class Controller implements ActionListener {
 	private AlgoritmoBM algoritmoBM;
 	private String file;
 
+	/**
+	 * 
+	 * @throws Exception
+	 */
 	public Controller() throws Exception {
 
 		principalView = new PrincipalView();
@@ -26,6 +30,7 @@ public class Controller implements ActionListener {
 
 		assignListeners();
 	}
+	
 
 	public void assignListeners() {
 
