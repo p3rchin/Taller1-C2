@@ -2,12 +2,14 @@ package co.edu.unbosque.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileView;
+import javax.swing.text.BadLocationException;
 
-import co.edu.unbosque.model.AlgoritmoBM;
+import co.edu.unbosque.model.AlgorithmBM;
 import co.edu.unbosque.view.FileWindowView;
 import co.edu.unbosque.view.PrincipalView;
 
@@ -15,8 +17,9 @@ public class Controller implements ActionListener {
 
 	private PrincipalView principalView;
 	private FileWindowView fileView;
-	private AlgoritmoBM algoritmoBM;
+	private AlgorithmBM algoritmoBM;
 	private String file;
+	private ArrayList<Integer> numeros;
 
 	/**
 	 * 
@@ -26,7 +29,8 @@ public class Controller implements ActionListener {
 
 		principalView = new PrincipalView();
 		fileView = new FileWindowView();
-		algoritmoBM = new AlgoritmoBM();
+		algoritmoBM = new AlgorithmBM();
+		numeros = new ArrayList<>();
 
 		assignListeners();
 	}
@@ -63,9 +67,16 @@ public class Controller implements ActionListener {
 		} else if (command.equals("SEARCHWORD")) {
 
 			if (!"".equals(fileView.getTextSearch().getText())) {
+				
 				String word = fileView.getTextSearch().getText();
-
-				fileView.getTextAreaShow().setText("La palabra se repite: " + algoritmoBM.search(file, word));
+				numeros = algoritmoBM.search(file, word);
+				System.out.println("La palabra se repite: " + numeros.get(numeros.size()-1));
+				try {
+					fileView.highlightText(word, numeros, fileView.getTextAreaShow());
+				} catch (BadLocationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			} else {
 				JOptionPane.showMessageDialog(null, "\n You must write a word ", "ADVERTENCIA!!!",
 						JOptionPane.WARNING_MESSAGE);
@@ -80,6 +91,5 @@ public class Controller implements ActionListener {
 		} else if (command.equals("WINDOWCLOSE1")) {
 			System.exit(0);
 		}
-
 	}
 }

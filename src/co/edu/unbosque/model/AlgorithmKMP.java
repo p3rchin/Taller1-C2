@@ -3,7 +3,7 @@ package co.edu.unbosque.model;
 
 // searching algorithm
 
-class AlgoritmoKMP {
+class AlgorithmKMP {
 	int KMPSearch(String pat, String txt) {
 
 		int amount = 0;
@@ -76,14 +76,5 @@ class AlgoritmoKMP {
 	}
 
 	// Driver program to test above function
-	public static void main(String args[]) {
-		String txt = "Hola como estas HOLA hola";
-
-		String pat = "hola";
-//		String resultado = txt.replaceAll(pat, pat.toUpperCase());
-//		System.out.println(resultado);
-		AlgoritmoKMP kmp = new AlgoritmoKMP();
-		System.err.println(kmp.KMPSearch(pat.toUpperCase(), txt.toUpperCase()));
-	}
 }
 // This code has been contributed by Amit Khandelwal.

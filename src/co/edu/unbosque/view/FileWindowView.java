@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +20,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
+import javax.swing.text.Highlighter.HighlightPainter;
 
 public class FileWindowView extends JFrame {
 
@@ -142,6 +147,17 @@ public class FileWindowView extends JFrame {
 		imageBackground = new JLabel(sourceBackground);
 		imageBackground.setSize(800, 600);
 		add(imageBackground);
+	}
+	
+	public void highlightText (String part, ArrayList<Integer> lista, JTextArea textArea) throws BadLocationException {
+		Highlighter highlighter = textArea.getHighlighter();
+		HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
+		
+		for (int i = 0; i < lista.size()-1; i++) {
+			highlighter.addHighlight(lista.get(i), (lista.get(i) + part.length()), painter);
+		}
+//		JOptionPane.showMessageDialog(null, new JScrollPane(textArea));
+		System.out.println(lista.get(lista.size()-1));
 	}
 
 	public String openFileToSearch() {
