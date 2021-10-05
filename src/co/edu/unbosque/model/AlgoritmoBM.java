@@ -17,9 +17,9 @@ public class AlgoritmoBM {
 			badchar[(int) str[i]] = i;
 	}
 
-	static int search(String text, String part) {
-		char txt []= text.toCharArray();
-		char pat [] = part.toCharArray();
+	public static int search(String text, String part) {
+		char txt[] = text.toCharArray();
+		char pat[] = part.toCharArray();
 		int m = pat.length;
 		int n = txt.length;
 		int contador = 0;
@@ -37,7 +37,7 @@ public class AlgoritmoBM {
 
 			if (j < 0) {
 				contador++;
-				
+
 //				System.out.println("Palabra encontrada en index = " + s);
 
 				s += (s + m < n) ? m - badchar[txt[s + m]] : 1;
@@ -51,9 +51,4 @@ public class AlgoritmoBM {
 		return contador;
 	}
 
-	public static void main(String[] args) {
-		String text = "OmaresunguelebichoOmar";
-		String part = "ESUNG";
-		System.out.println(search(text.toUpperCase(), part.toUpperCase()));
-	}
 }

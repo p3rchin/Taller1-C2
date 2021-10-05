@@ -4,8 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileView;
 
+import co.edu.unbosque.model.AlgoritmoBM;
 import co.edu.unbosque.view.FileWindowView;
 import co.edu.unbosque.view.PrincipalView;
 
@@ -13,11 +15,14 @@ public class Controller implements ActionListener {
 
 	private PrincipalView principalView;
 	private FileWindowView fileView;
+	private AlgoritmoBM algoritmoBM;
+	private String file;
 
 	public Controller() throws Exception {
 
 		principalView = new PrincipalView();
 		fileView = new FileWindowView();
+		algoritmoBM = new AlgoritmoBM();
 
 		assignListeners();
 	}
@@ -47,12 +52,20 @@ public class Controller implements ActionListener {
 		if (command.equals("INFILE")) {
 			principalView.setVisible(false);
 			fileView.setVisible(true);
-			String file = fileView.openFileToSearch();
+			file = fileView.openFileToSearch();
 			fileView.getTextAreaShow().setText(file);
-			
-			
-		}else if(command.equals("SEARCHWORD")) {
-			
+
+		} else if (command.equals("SEARCHWORD")) {
+
+			if (!"".equals(fileView.getTextSearch().getText())) {
+				String word = fileView.getTextSearch().getText();
+
+				fileView.getTextAreaShow().setText("La palabra se repite: " + algoritmoBM.search(file, word));
+			} else {
+				JOptionPane.showMessageDialog(null, "\n You must write a word ", "ADVERTENCIA!!!",
+						JOptionPane.WARNING_MESSAGE);
+			}
+
 		} else if (command.equals("WINDOWRETURN")) {
 			fileView.setVisible(false);
 			principalView.setVisible(true);
