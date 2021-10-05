@@ -70,7 +70,7 @@ public class Controller implements ActionListener {
 			if (!"".equals(fileView.getTextSearch().getText())) {
 
 				String word = fileView.getTextSearch().getText();
-				numeros = algorithmBM.search(file, word);
+				numeros = algorithmBM.search(file.toUpperCase(), word.toUpperCase());
 				System.out.println("La palabra se repite: " + numeros.get(numeros.size() - 1));
 				try {
 					fileView.highlightText(word, numeros, fileView.getTextAreaShow());
