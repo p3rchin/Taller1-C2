@@ -68,7 +68,7 @@ public class FileWindowView extends JFrame {
 		image.setVisible(true);
 		add(image);
 		
-		imageButton4 = new ImageIcon("ºimages/searchButton.png");
+		imageButton4 = new ImageIcon("images/searchButton.png");
 		sourceButton3 = new ImageIcon(imageButton4.getImage().getScaledInstance(92, 20, Image.SCALE_DEFAULT));
 		button1 = new TypeButton();
 		button1.setBounds(490, 60, 92, 20);
