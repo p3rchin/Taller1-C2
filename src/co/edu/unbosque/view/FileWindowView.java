@@ -152,7 +152,6 @@ public class FileWindowView extends JFrame {
 	public void highlightText(String part, ArrayList<Integer> lista, JTextArea textArea) throws BadLocationException {
 		Highlighter highlighter = textArea.getHighlighter();
 		HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
-
 		for (int i = 0; i < lista.size() - 1; i++) {
 			highlighter.addHighlight(lista.get(i), (lista.get(i) + part.length()), painter);
 		}
