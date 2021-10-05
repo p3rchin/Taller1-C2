@@ -1,11 +1,13 @@
 package co.edu.unbosque.model;
 // JAVA program for implementation of KMP pattern
 
+import java.util.ArrayList;
+
 // searching algorithm
 
-class AlgorithmKMP {
-	int KMPSearch(String pat, String txt) {
-
+public class AlgorithmKMP {
+	public ArrayList<Integer> KMPSearch(String txt, String pat) {
+		ArrayList<Integer> lista = new ArrayList<>();
 		int amount = 0;
 		int M = pat.length();
 		int N = txt.length();
@@ -18,16 +20,16 @@ class AlgorithmKMP {
 		// Preprocess the pattern (calculate lps[]
 		// array)
 		computeLPSArray(pat, M, lps);
-		
 
 		int i = 0; // index for txt[]
 		while (i < N) {
-			if ( pat.charAt(j) == txt.charAt(i)) {
+			if (pat.charAt(j) == txt.charAt(i)) {
 				j++;
 				i++;
 			}
 			if (j == M) {
 				amount++;
+				lista.add(i-j);
 				j = lps[j - 1];
 			}
 
@@ -41,7 +43,8 @@ class AlgorithmKMP {
 					i = i + 1;
 			}
 		}
-		return amount;
+		lista.add(amount);
+		return lista;
 	}
 
 	void computeLPSArray(String pat, int M, int lps[]) {

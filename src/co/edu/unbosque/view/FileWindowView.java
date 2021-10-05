@@ -148,16 +148,15 @@ public class FileWindowView extends JFrame {
 		imageBackground.setSize(800, 600);
 		add(imageBackground);
 	}
-	
-	public void highlightText (String part, ArrayList<Integer> lista, JTextArea textArea) throws BadLocationException {
+
+	public void highlightText(String part, ArrayList<Integer> lista, JTextArea textArea) throws BadLocationException {
 		Highlighter highlighter = textArea.getHighlighter();
 		HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
-		
-		for (int i = 0; i < lista.size()-1; i++) {
+
+		for (int i = 0; i < lista.size() - 1; i++) {
 			highlighter.addHighlight(lista.get(i), (lista.get(i) + part.length()), painter);
 		}
-//		JOptionPane.showMessageDialog(null, new JScrollPane(textArea));
-		System.out.println(lista.get(lista.size()-1));
+		System.out.println(lista.get(lista.size() - 1));
 	}
 
 	public String openFileToSearch() {

@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileView;
 import javax.swing.text.BadLocationException;
 
 import co.edu.unbosque.model.AlgorithmBM;
+import co.edu.unbosque.model.AlgorithmKMP;
 import co.edu.unbosque.view.FileWindowView;
 import co.edu.unbosque.view.PrincipalView;
 
@@ -17,7 +17,8 @@ public class Controller implements ActionListener {
 
 	private PrincipalView principalView;
 	private FileWindowView fileView;
-	private AlgorithmBM algoritmoBM;
+	private AlgorithmBM algorithmBM;
+	private AlgorithmKMP algorithmKMP;
 	private String file;
 	private ArrayList<Integer> numeros;
 
@@ -29,12 +30,12 @@ public class Controller implements ActionListener {
 
 		principalView = new PrincipalView();
 		fileView = new FileWindowView();
-		algoritmoBM = new AlgorithmBM();
+		algorithmBM = new AlgorithmBM();
+		algorithmKMP = new AlgorithmKMP();
 		numeros = new ArrayList<>();
 
 		assignListeners();
 	}
-	
 
 	public void assignListeners() {
 
@@ -67,10 +68,10 @@ public class Controller implements ActionListener {
 		} else if (command.equals("SEARCHWORD")) {
 
 			if (!"".equals(fileView.getTextSearch().getText())) {
-				
+
 				String word = fileView.getTextSearch().getText();
-				numeros = algoritmoBM.search(file, word);
-				System.out.println("La palabra se repite: " + numeros.get(numeros.size()-1));
+				numeros = algorithmBM.search(file, word);
+				System.out.println("La palabra se repite: " + numeros.get(numeros.size() - 1));
 				try {
 					fileView.highlightText(word, numeros, fileView.getTextAreaShow());
 				} catch (BadLocationException e1) {
