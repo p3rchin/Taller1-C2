@@ -1,5 +1,6 @@
 package co.edu.unbosque.controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -20,12 +21,10 @@ public class Controller implements ActionListener {
 	private AlgorithmBM algorithmBM;
 	private AlgorithmKMP algorithmKMP;
 	private String file;
+	private Color colorBM;
+	private Color colorKMP;
 	private ArrayList<Integer> numeros;
 
-	/**
-	 * 
-	 * @throws Exception
-	 */
 	public Controller() throws Exception {
 
 		principalView = new PrincipalView();
@@ -33,6 +32,8 @@ public class Controller implements ActionListener {
 		algorithmBM = new AlgorithmBM();
 		algorithmKMP = new AlgorithmKMP();
 		numeros = new ArrayList<>();
+		colorBM= new Color(240, 128, 128);
+		colorKMP= new Color(152, 251, 152);
 
 		assignListeners();
 	}
@@ -66,22 +67,43 @@ public class Controller implements ActionListener {
 			fileView.getTextAreaShow().setText(file);
 
 		} else if (command.equals("SEARCHWORD")) {
-
 			if (!"".equals(fileView.getTextSearch().getText())) {
 
-				String word = fileView.getTextSearch().getText();
-				numeros = algorithmBM.search(file.toUpperCase(), word.toUpperCase());
-				try {
-					fileView.getTextAreaShow().setText(file);
-					fileView.highlightText(word, numeros, fileView.getTextAreaShow());
-					fileView.getEstadisticText().setText("La palabra se repite: " + numeros.get(numeros.size() - 1) + " veces.");
-				} catch (BadLocationException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if (fileView.getOption().getSelectedItem().equals("Select the algorithm")) {
+					JOptionPane.showMessageDialog(null, "\n Choose an algorithm ", "Error",
+							JOptionPane.WARNING_MESSAGE);
+				} else if (fileView.getOption().getSelectedItem().equals("BM")) {
+					JOptionPane.showMessageDialog(null, "\n The user choose the algorithm BM ", "Message",
+							JOptionPane.INFORMATION_MESSAGE);
+					String word = fileView.getTextSearch().getText();
+					numeros = algorithmBM.search(file.toLowerCase(), word.toLowerCase());
+					try {
+						fileView.getTextAreaShow().setText(file);
+						fileView.highlightText(word, numeros, fileView.getTextAreaShow(),colorBM);
+						fileView.getEstadisticText()
+								.setText("La palabra se repite: " + numeros.get(numeros.size() - 1) + " veces.");
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "\n The user choose the algorithm KMP ", "Message",
+							JOptionPane.INFORMATION_MESSAGE);
+					String word = fileView.getTextSearch().getText();
+					numeros = algorithmKMP.KMPSearch(file.toLowerCase(), word.toLowerCase());
+					try {
+						fileView.getTextAreaShow().setText(file);
+						fileView.highlightText(word, numeros, fileView.getTextAreaShow(),colorKMP);
+						fileView.getEstadisticText()
+								.setText("La palabra se repite: " + numeros.get(numeros.size() - 1) + " veces.");
+					} catch (BadLocationException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
+
 			} else {
-				JOptionPane.showMessageDialog(null, "\n You must write a word ", "Error",
-						JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "\n You must write a word ", "Error", JOptionPane.WARNING_MESSAGE);
 			}
 
 		} else if (command.equals("WINDOWRETURN")) {

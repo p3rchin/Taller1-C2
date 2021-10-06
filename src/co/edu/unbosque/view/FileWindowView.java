@@ -42,7 +42,6 @@ public class FileWindowView extends JFrame {
 	private JFileChooser fileChooser;
 	private JComboBox<String> option;
 	String text;
-	
 
 	public FileWindowView() {
 
@@ -56,7 +55,6 @@ public class FileWindowView extends JFrame {
 		setVisible(false);
 
 	}
-	
 
 	public void initialize() {
 
@@ -83,7 +81,7 @@ public class FileWindowView extends JFrame {
 		textSearch.setFont(new Font("Arial", Font.ROMAN_BASELINE, 12));
 		textSearch.setBounds(129, 60, 200, 20);
 		add(textSearch);
-		
+
 		option = new JComboBox<String>();
 		option.addItem("Select the algorithm");
 		option.addItem("BM");
@@ -91,7 +89,7 @@ public class FileWindowView extends JFrame {
 		option.setFont(new Font("Arial", Font.ROMAN_BASELINE, 12));
 		option.setBounds(340, 60, 140, 20);
 		add(option);
-		
+
 		imageButton4 = new ImageIcon("images/searchButton.png");
 		sourceButton3 = new ImageIcon(imageButton4.getImage().getScaledInstance(92, 20, Image.SCALE_DEFAULT));
 		button1 = new TypeButton();
@@ -112,7 +110,7 @@ public class FileWindowView extends JFrame {
 		textAreaShow.setLineWrap(true);
 		scrollPane.setViewportView(textAreaShow);
 		add(scrollPane);
-		
+
 		estadisticText = new JTextArea();
 		estadisticText.setBounds(25, 465, 200, 20);
 		estadisticText.setFont(new Font("Verdama", Font.ROMAN_BASELINE, 15));
@@ -156,23 +154,33 @@ public class FileWindowView extends JFrame {
 		returnButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		returnButton.setActionCommand("WINDOWRETURN");
 		add(returnButton);
-		
-		
+
 		background1 = new ImageIcon(getClass().getResource("/images/background1.png"));
 		sourceBackground = new ImageIcon(background1.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH));
 		imageBackground = new JLabel(sourceBackground);
 		imageBackground.setSize(800, 600);
 		add(imageBackground);
 	}
+	/**
+	 * 
+	 * @param part
+	 * @param lista
+	 * @param textArea
+	 * @throws BadLocationException
+	 */
 
-	public void highlightText(String part, ArrayList<Integer> lista, JTextArea textArea) throws BadLocationException {
+	public void highlightText(String part, ArrayList<Integer> lista, JTextArea textArea,Color color) throws BadLocationException {
 		Highlighter highlighter = textArea.getHighlighter();
-		HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
+		HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(color);
 		for (int i = 0; i < lista.size() - 1; i++) {
 			highlighter.addHighlight(lista.get(i), (lista.get(i) + part.length()), painter);
 		}
-		System.out.println(lista.get(lista.size() - 1));
+
 	}
+	/**
+	 * 
+	 * @return
+	 */
 
 	public String openFileToSearch() {
 
@@ -180,17 +188,13 @@ public class FileWindowView extends JFrame {
 		text = "";
 
 		try {
-			/* llamamos el metodo que permite cargar la ventana */
+
 			FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
 			fileChooser.setFileFilter(filter);
 			fileChooser.showOpenDialog(this);
-			
-			/* abrimos el archivo seleccionado */
+
 			File open = fileChooser.getSelectedFile();
 
-			/*
-			 * recorremos el archivo, lo leemos para plasmarlo en el area de texto
-			 */
 			if (open != null && open.getName().endsWith("txt")) {
 				FileReader archive = new FileReader(open);
 				BufferedReader read = new BufferedReader(archive);
