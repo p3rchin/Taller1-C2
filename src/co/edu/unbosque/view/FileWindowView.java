@@ -114,8 +114,11 @@ public class FileWindowView extends JFrame {
 		add(scrollPane);
 		
 		estadisticText = new JTextArea();
-		estadisticText.setBounds(200, 465, 500, 260);
-		estadisticText.setFont(new Font("Verdama", Font.ROMAN_BASELINE, 12));
+		estadisticText.setBounds(25, 465, 200, 20);
+		estadisticText.setFont(new Font("Verdama", Font.ROMAN_BASELINE, 15));
+		estadisticText.setBackground(new Color(244, 137, 42));
+		estadisticText.setEditable(false);
+		estadisticText.setLineWrap(true);
 		add(estadisticText);
 
 		imageButton1 = new ImageIcon("images/minimize.png");
