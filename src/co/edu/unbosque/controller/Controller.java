@@ -72,6 +72,7 @@ public class Controller implements ActionListener {
 				String word = fileView.getTextSearch().getText();
 				numeros = algorithmBM.search(file.toUpperCase(), word.toUpperCase());
 				try {
+					fileView.getTextAreaShow().setText(file);
 					fileView.highlightText(word, numeros, fileView.getTextAreaShow());
 					fileView.getEstadisticText().setText("La palabra se repite: " + numeros.get(numeros.size() - 1) + " veces.");
 				} catch (BadLocationException e1) {
