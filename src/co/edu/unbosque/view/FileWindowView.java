@@ -11,8 +11,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
@@ -37,6 +40,7 @@ public class FileWindowView extends JFrame {
 	private JTextField textSearch;
 	private JScrollPane scrollPane;
 	private JFileChooser fileChooser;
+	private JComboBox<String> option;
 	String text;
 
 	public FileWindowView() {
@@ -69,10 +73,23 @@ public class FileWindowView extends JFrame {
 		ImageIcon ic1 = new ImageIcon(im1.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 
 		image = new JLabel(ic1);
-		image.setBounds(230, 60, 20, 20);
+		image.setBounds(102, 60, 20, 20);
 		image.setVisible(true);
 		add(image);
 
+		textSearch = new JTextField();
+		textSearch.setFont(new Font("Arial", Font.ROMAN_BASELINE, 12));
+		textSearch.setBounds(129, 60, 200, 20);
+		add(textSearch);
+		
+		option = new JComboBox<String>();
+		option.addItem("Select the algorithm");
+		option.addItem("BM");
+		option.addItem("KMP");
+		option.setFont(new Font("Arial", Font.ROMAN_BASELINE, 12));
+		option.setBounds(340, 60, 140, 20);
+		add(option);
+		
 		imageButton4 = new ImageIcon("images/searchButton.png");
 		sourceButton3 = new ImageIcon(imageButton4.getImage().getScaledInstance(92, 20, Image.SCALE_DEFAULT));
 		button1 = new TypeButton();
@@ -85,25 +102,18 @@ public class FileWindowView extends JFrame {
 		button1.setActionCommand("SEARCHWORD");
 		add(button1);
 
-		textSearch = new JTextField();
-		textSearch.setFont(new Font("Arial", Font.ROMAN_BASELINE, 12));
-		textSearch.setBounds(270, 60, 200, 20);
-		add(textSearch);
-
 		textAreaShow = new JTextArea();
+		textAreaShow.setPreferredSize(new Dimension(800, 400));
 		textAreaShow.setEditable(false);
 		textAreaShow.setBackground(Color.white);
 		textAreaShow.setFont(new Font("Verdama", Font.ROMAN_BASELINE, 14));
 		textAreaShow.setLineWrap(true);
 		scrollPane.setViewportView(textAreaShow);
-
+		add(scrollPane);
+		
 		estadisticText = new JTextArea();
-		estadisticText.setPreferredSize(new Dimension(540, 330));
-		estadisticText.setBounds(200, 100, 500, 260);
+		estadisticText.setBounds(200, 465, 500, 260);
 		estadisticText.setFont(new Font("Verdama", Font.ROMAN_BASELINE, 12));
-		estadisticText.setBackground(null);
-		estadisticText.setEditable(false);
-		estadisticText.setLineWrap(true);
 		add(estadisticText);
 
 		imageButton1 = new ImageIcon("images/minimize.png");
@@ -141,7 +151,8 @@ public class FileWindowView extends JFrame {
 		returnButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		returnButton.setActionCommand("WINDOWRETURN");
 		add(returnButton);
-
+		
+		
 		background1 = new ImageIcon(getClass().getResource("/images/background1.png"));
 		sourceBackground = new ImageIcon(background1.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH));
 		imageBackground = new JLabel(sourceBackground);
@@ -165,7 +176,10 @@ public class FileWindowView extends JFrame {
 
 		try {
 			/* llamamos el metodo que permite cargar la ventana */
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+			fileChooser.setFileFilter(filter);
 			fileChooser.showOpenDialog(this);
+			
 			/* abrimos el archivo seleccionado */
 			File open = fileChooser.getSelectedFile();
 
@@ -181,11 +195,11 @@ public class FileWindowView extends JFrame {
 
 				read.close();
 			} else {
-				JOptionPane.showMessageDialog(null, "\nChoose a correct file (txt)", "ADVERTENCIA!!!",
+				JOptionPane.showMessageDialog(null, "\nChoose a correct file (txt)", "Error",
 						JOptionPane.WARNING_MESSAGE);
 			}
 		} catch (IOException ex) {
-			JOptionPane.showMessageDialog(null, ex + "" + "\nNo se ha encontrado el archivo", "ADVERTENCIA!!!",
+			JOptionPane.showMessageDialog(null, ex + "" + "\nNo se ha encontrado el archivo", "Error",
 					JOptionPane.WARNING_MESSAGE);
 		}
 		return text;
@@ -346,6 +360,20 @@ public class FileWindowView extends JFrame {
 	}
 
 	/**
+	 * @return the image
+	 */
+	public JLabel getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(JLabel image) {
+		this.image = image;
+	}
+
+	/**
 	 * @return the button1
 	 */
 	public TypeButton getButton1() {
@@ -472,6 +500,20 @@ public class FileWindowView extends JFrame {
 	}
 
 	/**
+	 * @return the estadisticText
+	 */
+	public JTextArea getEstadisticText() {
+		return estadisticText;
+	}
+
+	/**
+	 * @param estadisticText the estadisticText to set
+	 */
+	public void setEstadisticText(JTextArea estadisticText) {
+		this.estadisticText = estadisticText;
+	}
+
+	/**
 	 * @return the textSearch
 	 */
 	public JTextField getTextSearch() {
@@ -514,14 +556,28 @@ public class FileWindowView extends JFrame {
 	}
 
 	/**
-	 * @return the texto
+	 * @return the option
+	 */
+	public JComboBox<String> getOption() {
+		return option;
+	}
+
+	/**
+	 * @param option the option to set
+	 */
+	public void setOption(JComboBox<String> option) {
+		this.option = option;
+	}
+
+	/**
+	 * @return the text
 	 */
 	public String getText() {
 		return text;
 	}
 
 	/**
-	 * @param texto the texto to set
+	 * @param text the text to set
 	 */
 	public void setText(String text) {
 		this.text = text;

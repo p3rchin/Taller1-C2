@@ -71,15 +71,15 @@ public class Controller implements ActionListener {
 
 				String word = fileView.getTextSearch().getText();
 				numeros = algorithmBM.search(file.toUpperCase(), word.toUpperCase());
-				System.out.println("La palabra se repite: " + numeros.get(numeros.size() - 1));
 				try {
 					fileView.highlightText(word, numeros, fileView.getTextAreaShow());
+					fileView.getEstadisticText().setText("La palabra se repite: " + numeros.get(numeros.size() - 1));
 				} catch (BadLocationException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "\n You must write a word ", "ADVERTENCIA!!!",
+				JOptionPane.showMessageDialog(null, "\n You must write a word ", "Error",
 						JOptionPane.WARNING_MESSAGE);
 			}
 
