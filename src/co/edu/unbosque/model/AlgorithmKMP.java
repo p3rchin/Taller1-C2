@@ -6,6 +6,15 @@ import java.util.ArrayList;
 // searching algorithm
 
 public class AlgorithmKMP {
+	/**
+	 * This method preprocess the pattern by calculate the loops using the other
+	 * method down here this search the index and save them.
+	 * 
+	 * @param txt is the all text. txt!=" "
+	 * @param pat is the part that has the string[ ].pat!=" ", pat!=null
+	 * @return a list with the amount of times that the char is finding and also the
+	 *         char itself.
+	 */
 	public ArrayList<Integer> KMPSearch(String txt, String pat) {
 		ArrayList<Integer> lista = new ArrayList<>();
 		int amount = 0;
@@ -29,7 +38,7 @@ public class AlgorithmKMP {
 			}
 			if (j == M) {
 				amount++;
-				lista.add(i-j);
+				lista.add(i - j);
 				j = lps[j - 1];
 			}
 
@@ -47,7 +56,14 @@ public class AlgorithmKMP {
 		return lista;
 	}
 
-	void computeLPSArray(String pat, int M, int lps[]) {
+	/**
+	 * This method calculate the loop, this also search the char.
+	 * 
+	 * @param pat is the part of the string.pat != null, pat!=" "
+	 * @param M   is the middle of the loop.M != null, M!=" "
+	 * @param lps is the array of loop.lps != null, lps!=" "
+	 */
+	public void computeLPSArray(String pat, int M, int lps[]) {
 		// length of the previous longest prefix suffix
 		int len = 0;
 		int i = 1;
@@ -77,7 +93,4 @@ public class AlgorithmKMP {
 			}
 		}
 	}
-
-	// Driver program to test above function
 }
-// This code has been contributed by Amit Khandelwal.

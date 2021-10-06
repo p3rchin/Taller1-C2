@@ -42,6 +42,7 @@ public class FileWindowView extends JFrame {
 	private JFileChooser fileChooser;
 	private JComboBox<String> option;
 	String text;
+	
 
 	public FileWindowView() {
 
@@ -55,6 +56,7 @@ public class FileWindowView extends JFrame {
 		setVisible(false);
 
 	}
+	
 
 	public void initialize() {
 

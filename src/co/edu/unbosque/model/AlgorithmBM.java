@@ -10,6 +10,15 @@ public class AlgorithmBM {
 		return (a > b) ? a : b;
 	}
 
+	/**
+	 * This method has the functionality to organize the string that receive the
+	 * algorithm
+	 * 
+	 * @param str     is the array that has the string.str!=null, str!=" "
+	 * @param size    is the size of the char.size!=null, str!=" "
+	 * @param badchar is another array that don't have the "letters" of the
+	 *                text.badchar!=null, str!=" "
+	 */
 	void badCharHeuristic(char[] str, int size, int badchar[]) {
 
 		for (int i = 0; i < NO_OF_CHARS; i++)
@@ -18,6 +27,15 @@ public class AlgorithmBM {
 		for (int i = 0; i < size; i++)
 			badchar[(int) str[i]] = i;
 	}
+
+	/**
+	 * This method search the char that the user need to find
+	 * 
+	 * @param text is the entire text that chose the user.text!=null, text!=" "
+	 * @param part the part that the algorithm save in the array.part!=null, part!=" "
+	 * @return a list with the times that the char is repeated in the text and also
+	 *         the char that the user search
+	 */
 
 	public ArrayList<Integer> search(String text, String part) {
 		ArrayList<Integer> lista = new ArrayList<>();
