@@ -186,6 +186,10 @@ public class Controller implements ActionListener {
 		} else if (command.equals("WINDOWRETURN")) {
 			fileView.setVisible(false);
 			principalView.setVisible(true);
+			fileView.getTextAreaShow().setText("");
+			fileView.getTextSearch().setText("");
+			fileView.getOption().setSelectedIndex(0);
+			fileView.getEstadisticText().setText("");
 
 		} else if (command.equals("WINDOWMINIMIZE1")) {
 			fileView.setExtendedState(JFrame.ICONIFIED);
