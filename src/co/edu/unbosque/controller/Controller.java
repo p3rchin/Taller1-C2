@@ -76,7 +76,7 @@ public class Controller implements ActionListener {
 	/**
 	 * This constructor define the instances.
 	 * <b>pre</b>Must exist declarations of the instances.<br>
-	 * <b>post</b>The instances of a class.</br>
+	 * <b>post</b>The instances of a class.<br>
 	 * @throws Exception is an event when a error occurred.
 	 */
 

@@ -63,6 +63,12 @@ public class PrincipalView extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 *  Constructor of the class in which the different components are initialized together with the method of initializing components for its operation, these components are of JFrame and those of the method.
+	 *  <b>pre</b>The attributes must be added in the method to initialize them and add them in the window, together with the panels must be initialized.<br>
+	 *  <b>post</b>The initialized components will be added in the window to be able to select and have an interface.<br>
+	 */
+	
 	public void initializeComponents() {
 		
 		imageButton1 = new ImageIcon("images/minimize.png");
