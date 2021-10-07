@@ -10,28 +10,23 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 
 /**
- * Clase Boton.
  * 
- * Clase que da diferentes efectos a los botones que se tienen en la vista.
- * 
- * @author Grupo de trabajo: Jhoan Ricardo Cuevas Patiño, Fabián Camilo Gómez
- *         Céspedes, Omar Felipe Ladino Guezguan y Juan Felipe Rojas Rodríguez.
+ * @author Santiago Porras, Fabian Camilo Gomez, Omar Felipe Ladino y Santiago
+ *         Acevedo.
  *
  */
+
 public class TypeButton extends JButton {
 	/*
-	 * opacity es de tipo float.
+	 * opacity is of type float.
 	 */
 	float opacity = 0.9f;
 
 	/**
-	 * Constructor específico de la clase Boton donde tiene un parámetro tipo String
-	 * y contiene un método. <b>pre</b> Se debe ingresar el parámetro de tipo
-	 * String.<br>
-	 * <b>post</b> Se le agrega un escuchador al botón al momento de pasar sobre
-	 * él.<br>
-	 * 
-	 * @param text de tipo String: text debe ser != de null y != de " ".
+	 * Specific constructor of the Button class where it has a String parameter and contains a method.  
+	 * <b>pre</b>The String parameter must be entered.<br>
+	 * <b>post</b>A listener is added to the button when hovering over it.<br>
+	 * @param text of String type: text must be != of null and != of " ".
 	 */
 	public TypeButton(String text) {
 		super(text);
@@ -39,10 +34,9 @@ public class TypeButton extends JButton {
 	}
 
 	/**
-	 * Constructor específico de la clase Boton donde contiene un método para la
-	 * escucha del mouse. <b>pre</b> Se debe agregar el método dentro del
-	 * constructor para su funcionamiento.<br>
-	 * <b>post</b> Se le agrega un escuchador al botón.<br>
+	 * Specific constructor of the Button class where it contains a method for listening to the mouse. 
+	 * <b>pre</b>The method must be added inside the constructor for it to work.<br>
+	 * <b>post</b>A listener is added to the button.<br>
 	 */
 	public TypeButton() {
 		super();
@@ -65,12 +59,10 @@ public class TypeButton extends JButton {
 	}
 
 	/**
-	 * Método que recibe un parámetro de tipo Graphics. Este le da las gráficas
-	 * necesarias a los botones para que se pueda ver su opacidad. <b>pre</b> Se le
-	 * tiene que mandar el parámetro para que funcione su opacidad<br>
-	 * <b>post</b> Se le agrega la opacidad.<br>
-	 * 
-	 * @param g es de tipo Graphics.
+	 * Method that receives a parameter of type Graphics. It gives the necessary graphics to the buttons so that their opacity can be seen. 
+	 * <b>pre</b> You have to send the parameter to make your opacity work.<br>
+	 * <b>post</b>Opacity is added.<br>
+	 * @param g is of type Graphics.
 	 */
 	@Override
 	public void paintComponent(Graphics g) {
@@ -80,20 +72,16 @@ public class TypeButton extends JButton {
 	}
 
 	/**
-	 * Clase EventButton que extiende de MouseAdapter para completar las acciones
-	 * que se le agregan al botón
+	 * EventButton class that extends MouseAdapter to complete the actions that are added to the button.
 	 * 
-	 * @author Grupo de trabajo: Jhoan Ricardo Cuevas Patiño, Fabián Camilo Gómez
-	 *         Céspedes, Omar Felipe Ladino Guezguan y Juan Felipe Rojas Rodríguez.
+	 * @author Santiago Porras, Fabian Camilo Gomez, Omar Felipe Ladino y Santiago Acevedo.
 	 *
 	 */
 	public class EventButton extends MouseAdapter {
 		/**
-		 * Método que recibe un parámetro para ver si el mouse ha salido del botón y
-		 * volverlo opaco. <b>pre</b> Se debe agregar el método la variable me para su
-		 * funcionamiento.<br>
-		 * <b>post</b> Se le agrega el efecto de opacidad al momento de salir del
-		 * botón.<br>
+		 * Method that receives a parameter to see if the mouse has left the button and make it opaque.
+		 *  <b>pre</b>The variable me must be added to the method for it to work.<br>
+		 * <b>post</b>The opacity effect is added when exiting the button.<br>
 		 */
 		@Override
 		public void mouseExited(MouseEvent me) {
@@ -101,11 +89,9 @@ public class TypeButton extends JButton {
 		}
 
 		/**
-		 * Método que recibe un parámetro para ver si el mouse ha entrado al botón y
-		 * volverlo claro. <b>pre</b> Se debe agregar el método la variable me para su
-		 * funcionamiento.<br>
-		 * <b>post</b> Se le agrega el efecto de claridad al momento de salir del
-		 * botón.<br>
+		 * Method that receives a parameter to see if the mouse has entered the button and return it clear. 
+		 * <b>pre</b>The variable me must be added to the method for it to work.<br>
+		 * <b>post</b> Clarity effect is added when exiting the button.<br>
 		 */
 		@Override
 		public void mouseEntered(MouseEvent me) {
@@ -113,11 +99,9 @@ public class TypeButton extends JButton {
 		}
 
 		/**
-		 * Método que recibe un parámetro para ver si el mouse ha seleccionado el botón
-		 * y darle la animación. <b>pre</b> Se debe agregar el método la variable me
-		 * para su funcionamiento.<br>
-		 * <b>post</b> Se le agrega el efecto al momento de ser seleccionado del
-		 * botón.<br>
+		 * Method that receives a parameter to see if the mouse has selected the button and give it the animation.
+		 *  <b>pre</b> The method must be added to the variable for it to work.<br>
+		 * <b>post</b> The effect is added when the button is selected.<br>
 		 */
 		@Override
 		public void mousePressed(MouseEvent me) {
@@ -125,18 +109,16 @@ public class TypeButton extends JButton {
 		}
 
 		/**
-		 * Método para verificar los parámetros que se le están ingresando y que puedan
-		 * cumplir con los métodos antereiores. <b>pre</b> Se le deben ingresar los
-		 * parámetros para que el método realice las acciones<br>
-		 * <b>post</b> Se le aplica la animación que necesite el botón.<br>
-		 * 
-		 * @param index es de tipo float: index es 0 <= i.
-		 * @param range es de tipo float: range es 0 <= i.
-		 * @param cont  es de tipo float: cont es 0 <= i.
-		 * @param sleep es de tipo int: debe ser != 0.
-		 * @param event es de tipo boolean: puede tener los valores de verdadero o
-		 *              falso.
+		 * Method to verify the parameters being entered and that they can comply with the above methods.
+		 * <b>pre</b>Parameters must be entered for the method to perform the following actions<br>
+		 * <b>post</b>The animation needed for the button is applied.<br>
+		 * @param index is of type float: index is 0 <= i.
+		 * @param range is of type float: range is 0 <= i.
+		 * @param cont  is of type float: cont is 0 <= i.
+		 * @param sleep is of type int: must be != 0.
+		 * @param event is of type boolean: can have the values true or false.
 		 */
+		
 		private void efectHover(float index, float range, float cont, int sleep, boolean event) {
 			new Thread(() -> {
 				for (float i = index; (event) ? i <= range : i >= range; i = (event) ? i + cont : i - cont) {

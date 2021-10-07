@@ -1,20 +1,28 @@
+/**
+ * Package containing the class
+ */
 package co.edu.unbosque.model;
 // JAVA program for implementation of KMP pattern
 
 import java.util.ArrayList;
 
-// searching algorithm
+/**
+ * 
+ * @author Santiago Porras, Fabian Camilo Gomez, Omar Felipe Ladino y Santiago Acevedo.
+ *
+ */
 
 public class AlgorithmKMP {
+	
 	/**
-	 * This method preprocess the pattern by calculate the loops using the other
-	 * method down here this search the index and save them.
-	 * 
-	 * @param txt is the all text. txt!=" "
-	 * @param pat is the part that has the string[ ].pat!=" ", pat!=null
-	 * @return a list with the amount of times that the char is finding and also the
-	 *         char itself.
+	 * This method preprocess the pattern by calculate the loops using the other method down here this search the index and save them.
+	 * <b>pre</b>The part must be inside the text.<br>
+	 * <b>post</b>An arrayList with the index position must be returned and the amount.<br>
+	 * @param txt is the all text. txt must be != " ".
+	 * @param pat is the part that has the string[ ]. pat must be != " " and != null.
+	 * @return a list with the amount of times that the char is finding and also the char itself.
 	 */
+	
 	public ArrayList<Integer> KMPSearch(String txt, String pat) {
 		ArrayList<Integer> lista = new ArrayList<>();
 		int amount = 0;
@@ -52,11 +60,13 @@ public class AlgorithmKMP {
 
 	/**
 	 * This method calculate the loop, this also search the char.
-	 * 
-	 * @param pat is the part of the string.pat != null, pat!=" "
-	 * @param M   is the middle of the loop.M != null, M!=" "
-	 * @param lps is the array of loop.lps != null, lps!=" "
+	 * <b>pre</b>The part in the text must be worth for the method.<br>
+	 * <b>post</b>The lps of the array must be founded.<br>
+	 * @param pat is the part of the string. pat must be != null and != " ".
+	 * @param M is the middle of the loop. M must be != null and != " ".
+	 * @param lps is the array of loop. lps must be != null and != " ".
 	 */
+	
 	public void computeLPSArray(String pat, int M, int lps[]) {
 		// length of the previous longest prefix suffix
 		int len = 0;

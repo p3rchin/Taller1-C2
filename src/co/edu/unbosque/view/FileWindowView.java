@@ -1,3 +1,7 @@
+/**
+ * Package containing the class
+ */
+
 package co.edu.unbosque.view;
 
 import java.awt.Color;
@@ -28,21 +32,66 @@ import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 import javax.swing.text.Highlighter.HighlightPainter;
 
+/**
+ * 
+ * @author Santiago Porras, Fabian Camilo Gomez, Omar Felipe Ladino y Santiago Acevedo.
+ *
+ */
 public class FileWindowView extends JFrame {
 
+	
+	/**
+	 * background1, sourceBackground, imageButton1, sourceButton1, imageButton2, sourceButton2, imageButton3, sourceButton3, imageButton4, sourceButton4, imageButton5, sourceButton5 are ImageIcon type.
+	 */
 	private ImageIcon background1, sourceBackground, imageButton1, sourceButton1, imageButton2, sourceButton2,
-			imageButton3, sourceButton3, imageButton4, sourceButton4;
+			imageButton3, sourceButton3, imageButton4, sourceButton4, imageButton5, sourceButton5;
+	/**
+	 * imageBackground, image are JLabel type.
+	 */
 	private JLabel imageBackground, image;
-	private TypeButton button1, button2, button3;
+	/**
+	 * button1, button2, button3, button4 are TypeButton type.
+	 */
+	private TypeButton button1, button2, button3, button4;
+	/**
+	 * searchButton, returnButton, minimize, close are JButton type.
+	 */
 	private JButton searchButton, returnButton, minimize, close;
+	/**
+	 * tittle1 is JLabel type.
+	 */
 	private JLabel title1;
+	/**
+	 * textAreaShow, estadisticText are JTexArea type.
+	 */
 	private JTextArea textAreaShow, estadisticText;
+	/**
+	 * textSearch is JTextField type.
+	 */
 	private JTextField textSearch;
+	/**
+	 * scrollPane is JScrollPane type.
+	 */
 	private JScrollPane scrollPane;
+	/**
+	 * fileChooser is JFileChooser type.
+	 */
 	private JFileChooser fileChooser;
+	/**
+	 * option is JComboBox type.
+	 */
 	private JComboBox<String> option;
+	/**
+	 * text is String type.
+	 */
 	String text;
 
+	/**
+	 *  Constructor of the class in which the different components are initialized together with the method of initializing components for its operation, these components are of JFrame and those of the method.
+	 *  <b>pre</b>It must contain the components of the frame so that the window can be seen.<br>
+	 *  <b>post</b>The components that were entered in the constructor are displayed.<br>
+	 */
+	
 	public FileWindowView() {
 
 		setTitle("Words searcher");
@@ -56,6 +105,12 @@ public class FileWindowView extends JFrame {
 
 	}
 
+	/**
+	 *  Constructor of the class in which the different components are initialized together with the method of initializing components for its operation, these components are of JFrame and those of the method.
+	 *  <b>pre</b>The attributes must be added in the method to initialize them and add them in the window, together with the panels must be initialized.<br>
+	 *  <b>post</b>The initialized components will be added in the window to be able to select and have an interface.<br>
+	 */
+	
 	public void initialize() {
 
 		fileChooser = new JFileChooser();
@@ -112,12 +167,24 @@ public class FileWindowView extends JFrame {
 		add(scrollPane);
 
 		estadisticText = new JTextArea();
-		estadisticText.setBounds(25, 465, 200, 20);
+		estadisticText.setBounds(25, 465, 230, 20);
 		estadisticText.setFont(new Font("Verdama", Font.ROMAN_BASELINE, 15));
 		estadisticText.setBackground(new Color(244, 137, 42));
 		estadisticText.setEditable(false);
 		estadisticText.setLineWrap(true);
 		add(estadisticText);
+		
+		imageButton5 = new ImageIcon("images/cleanButton.png");
+		sourceButton5 = new ImageIcon(imageButton5.getImage().getScaledInstance(92, 28, Image.SCALE_DEFAULT));
+		button4 = new TypeButton();
+		button4.setBounds(280, 462, 92, 28);
+		button4.setBorderPainted(false);
+		button4.setContentAreaFilled(false);
+		button4.setFocusPainted(false);
+		button4.setIcon(sourceButton5);
+		button4.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		button4.setActionCommand("CLEANTEXT");
+		add(button4);
 
 		imageButton1 = new ImageIcon("images/minimize.png");
 		sourceButton1 = new ImageIcon(imageButton1.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
@@ -162,24 +229,29 @@ public class FileWindowView extends JFrame {
 		add(imageBackground);
 	}
 	/**
-	 * 
-	 * @param part
-	 * @param lista
-	 * @param textArea
-	 * @throws BadLocationException
+	 * The initialized components will be added in the window to be able to select and have an interface.
+	 * <b>pre</b>There must be a text, the list of its index and the word to be searched.<br>
+	 * <b>post</b>If everything is correct, the text is painted in the JTextArea.<br>
+	 * @param part is String type: part must be != null and != " ".
+	 * @param list is ArrayList type: list must be != null and != " ". 
+	 * @param textArea is JTextArea type: textArea must be != null.
+	 * @throws BadLocationException is the exception for the highlight method.
 	 */
 
-	public void highlightText(String part, ArrayList<Integer> lista, JTextArea textArea,Color color) throws BadLocationException {
+	public void highlightText(String part, ArrayList<Integer> list, JTextArea textArea,Color color) throws BadLocationException {
 		Highlighter highlighter = textArea.getHighlighter();
 		HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(color);
-		for (int i = 0; i < lista.size() - 1; i++) {
-			highlighter.addHighlight(lista.get(i), (lista.get(i) + part.length()), painter);
+		for (int i = 0; i < list.size() - 1; i++) {
+			highlighter.addHighlight(list.get(i), (list.get(i) + part.length()), painter);
 		}
 
 	}
+
 	/**
-	 * 
-	 * @return
+	 * This method is for inserting and reading the txt file.
+	 * <b>pre</b>The file must be txt and contain<br>
+	 * <b>post</b>The file is converted to String type.<br>
+	 * @return The String of the file.
 	 */
 
 	public String openFileToSearch() {
@@ -355,6 +427,34 @@ public class FileWindowView extends JFrame {
 	}
 
 	/**
+	 * @return the imageButton5
+	 */
+	public ImageIcon getImageButton5() {
+		return imageButton5;
+	}
+
+	/**
+	 * @param imageButton5 the imageButton5 to set
+	 */
+	public void setImageButton5(ImageIcon imageButton5) {
+		this.imageButton5 = imageButton5;
+	}
+
+	/**
+	 * @return the sourceButton5
+	 */
+	public ImageIcon getSourceButton5() {
+		return sourceButton5;
+	}
+
+	/**
+	 * @param sourceButton5 the sourceButton5 to set
+	 */
+	public void setSourceButton5(ImageIcon sourceButton5) {
+		this.sourceButton5 = sourceButton5;
+	}
+
+	/**
 	 * @return the imageBackground
 	 */
 	public JLabel getImageBackground() {
@@ -422,6 +522,20 @@ public class FileWindowView extends JFrame {
 	 */
 	public void setButton3(TypeButton button3) {
 		this.button3 = button3;
+	}
+
+	/**
+	 * @return the button4
+	 */
+	public TypeButton getButton4() {
+		return button4;
+	}
+
+	/**
+	 * @param button4 the button4 to set
+	 */
+	public void setButton4(TypeButton button4) {
+		this.button4 = button4;
 	}
 
 	/**

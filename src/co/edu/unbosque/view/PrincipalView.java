@@ -1,3 +1,7 @@
+/**
+ * Package containing the class
+ */
+
 package co.edu.unbosque.view;
 
 import java.awt.Cursor;
@@ -8,16 +12,43 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+/**
+ * 
+ * @author  Santiago Porras, Fabian Camilo Gomez, Omar Felipe Ladino y Santiago Acevedo.
+ *
+ */
 public class PrincipalView extends JFrame {
+	
+	/**
+	 * background1, sourceBackground, imageButton1, sourceButton1, imageButton2, sourceButton2, imageButton3, sourceButton3, imageButton4, sourceButton4 are ImageIcon type.
+	 */
 	
 	private ImageIcon background1, sourceBackground, imageButton1, sourceButton1, imageButton2, sourceButton2,
 	imageButton3, sourceButton3, imageButton4, sourceButton4;
 	
+	/**
+	 * imageBackground is JLabel type.
+	 */
+	
 	private JLabel imageBackground;
+	
+	/**
+	 * button1, button2 are TypeButton type.
+	 */
 	
 	private TypeButton button1, button2;
 	
+	/**
+	 * minimize and close are JButton type.
+	 */
+	
 	private JButton minimize, close;
+	
+	/**
+	 *  Constructor of the class in which the different components are initialized together with the method of initializing components for its operation, these components are of JFrame and those of the method.
+	 *  <b>pre</b>It must contain the components of the frame so that the window can be seen.<br>
+	 *  <b>post</b>The components that were entered in the constructor are displayed.<br>
+	 */
 
 	public PrincipalView() {
 
